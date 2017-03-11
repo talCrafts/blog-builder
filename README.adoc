@@ -1,0 +1,14 @@
+= TalCrafts Blog
+TalCrafts<talcrafts07@gmail.com>
+
+== Introduction
+
+This code bases uses https://gohugo.io/[Hugo] static site generator. For more details and installation intructions, please refer to the official documentations of https://gohugo.io/[Hugo].
+
+
+== Steps to create a new post
+
+Open terminal and go to the root folder and fire below command
+`hugo new post/<file-name.md>`
+
+It will create a new file in `content/post` folder.Open the file in any editor and start writing your content.
