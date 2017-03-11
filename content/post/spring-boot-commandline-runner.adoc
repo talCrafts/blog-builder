@@ -1,0 +1,91 @@
++++
+date = "2017-03-10T22:30:46+05:30"
+title = "Spring boot CommandLineRunner Interface"
+description = "description"
+draft = false
+categories = ["Spring"]
+tags = ["Java","Spring Boot"]
+author = "Imteyaz Ahmad"
+
++++
+
+**Introduction**
+
+Spring Boot provides an interface called `CommandLineRunner` which is used indicate that a bean should run when it is contained within a `SpringApplication`.
+
+We can define multiple `CommandLineRunner` beans in the same application context and set their order by using `Ordered` interface or by using `@Order` annotation.
+
+<!--more-->
+
+[source,java,linenums]
+----
+public interface CommandLineRunner {
+
+	/**
+	 * Callback used to run the bean.
+	 * @param args incoming main method arguments
+	 * @throws Exception on error
+	 */
+	void run(String... args) throws Exception;
+
+}
+----
+
+**Example**
+
+Here we have two beans `Greeting` and `GreetingReply` which implement `CommandLineRunner` interface.
+
+[source,java,linenums]
+----
+package com.talcrafts;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+@SpringBootApplication
+public class BlogCodeApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(BlogCodeApplication.class, args);
+    }
+
+
+    @Component
+    @Order(1)
+    class Greeting implements CommandLineRunner {
+
+        @Override
+        public void run(String... args) throws Exception {
+            System.out.println("He said: Hello, how are you ?");
+        }
+    }
+
+    @Component
+    @Order(2)
+    class GreetingReply implements CommandLineRunner {
+
+        @Override
+        public void run(String... args) throws Exception {
+            System.out.println("She replied: I am doing good..thanks for asking!");
+        }
+    }
+
+}
+----
+
+When we run this application, the following output is printed on console.
+
+[source,java]
+----
+....
+He said: Hello, how are you ?
+She replied: I am doing good..thanks for asking! :
+....
+----
+
+*Conclusion*
+
+In this article, we saw how to use `CommandLineRunner` interface. It is very usefull when we don't have any UI to trigger something or we want something to execute just after the application context is up.
