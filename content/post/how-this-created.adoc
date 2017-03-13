@@ -1,0 +1,66 @@
++++
+categories = ["Blog"]
+tags = ["Hugo","gh-pages"]
+author = "Imteyaz Ahmad"
+description = "This explains how this blog site was created"
+date = "2017-03-12T17:37:02+05:30"
+title = "Create a static website with Hugo and Host it with Github Pages"
+draft = false
+
++++
+
+*Indroduction*
+
+In this article we will explain how to create a blog site with minimum cost and with absolutely no hosting server of our own.
+
+*Tools Used*
+
+- https://gohugo.io/[Hugo] : A fast and modern static website engine.
+- Any text editor of your choice. I prefer https://atom.io/[Atom] because of its plugeable architecture and its in-built support for editing and previewing mark-down files.
+
+<!--more-->
+
+*Steps Followed*
+
+- Download and install https://gohugo.io/[Hugo]. More details provided in https://gohugo.io/overview/installing/[getting started] guide of Hugo.
+
+- Once Hugo is installed, open a terminal and go the folder where you want to keep the code for your blog or static website.
+
+- Run  `hugo new site <your-site-name>` to create a new website. It will create following directories in the folder:
+[source]
+    ----
+    ├── archetypes
+    ├── config.toml
+    ├── content
+    ├── data
+    ├── layouts
+    ├── public
+    ├── static
+    └── themes
+    ----
+
+- Now go to http://themes.gohugo.io/ and clone a theme of your choice in `themes` folder.
+
+- Once done, copy the `config.toml` from the downloaded theme into the root folder of the the website and run `hugo server --buildDrafts` from the root directory. It will start the server on port 1313. You can access the site from `http://localhost:1313`
+
+- To create a new blog entry, run `hugo new post/<blog-file-name>.md`. It will create a file in `content/post/` folder.
+
+- Open the newly created file in any of the editor and start writing the content of the blog.
+
+- Once you are done with your content, delete content of `public` folder and run `hugo` command to regenerate the files.
+
+- Create a repo on https://github.com[Github] and check in the content of the `public` folder.
+
+- Now go to you repository on https://github.com and create a new branch called `gh-pages`. Click on `settings` and go to `GitHub Pages` section of the page, you will see a message like `Your site is published at https://<user_name>.github.io/<repo-name>/`. You can use this link to access your static website or blog.
+
+If you want to use custom domain please follow https://help.github.com/articles/using-a-custom-domain-with-github-pages/[this]
+
+I have included some links that can be helpful while following these steps. Please feel free to ask any questions or help.
+
+Any feedbacks or suggestions will be greatly appreciated.
+
+*Reference*
+
+- https://gohugo.io/
+- https://atom.io/
+- https://help.github.com/articles/using-a-custom-domain-with-github-pages/
