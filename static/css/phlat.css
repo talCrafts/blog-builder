@@ -15,7 +15,7 @@ body{
 }
 
 .navbar-default .navbar-brand {
-    color: #555555;
+    color: #ffffff !important;
     font-weight: 700;
     font-size: 22px;
 }
@@ -39,11 +39,12 @@ body{
     padding-bottom: 10px;
     padding-left: 0px;
     padding-right: 0px;
+    color: #ffffff !important;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
     background-color: transparent;
-    color: #555555;
+    color: #ffffff;
 }
 /*
  * END NAVIGATION
