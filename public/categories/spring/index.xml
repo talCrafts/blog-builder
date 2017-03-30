@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on TalCrafts Blog</title>
+    <link>http://www.talcrafts.com/categories/spring/index.xml</link>
+    <description>Recent content in Spring on TalCrafts Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://www.talcrafts.com/categories/spring/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Spring boot CommandLineRunner Interface</title>
+      <link>http://www.talcrafts.com/2017/03/spring-boot-commandlinerunner-interface/</link>
+      <pubDate>Fri, 10 Mar 2017 22:30:46 +0530</pubDate>
+      
+      <guid>http://www.talcrafts.com/2017/03/spring-boot-commandlinerunner-interface/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Spring Boot provides an interface called &lt;code&gt;CommandLineRunner&lt;/code&gt; which is used indicate that a bean should run when it is contained within a &lt;code&gt;SpringApplication&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;We can define multiple &lt;code&gt;CommandLineRunner&lt;/code&gt; beans in the same application context and set their order by using &lt;code&gt;Ordered&lt;/code&gt; interface or by using &lt;code&gt;@Order&lt;/code&gt; annotation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;public interface CommandLineRunner {
+
+	/**
+	 * Callback used to run the bean.
+	 * @param args incoming main method arguments
+	 * @throws Exception on error
+	 */
+	void run(String... args) throws Exception;
+
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Here we have two beans &lt;code&gt;Greeting&lt;/code&gt; and &lt;code&gt;GreetingReply&lt;/code&gt; which implement &lt;code&gt;CommandLineRunner&lt;/code&gt; interface.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.talcrafts;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+@SpringBootApplication
+public class BlogCodeApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(BlogCodeApplication.class, args);
+    }
+
+
+    @Component
+    @Order(1)
+    class Greeting implements CommandLineRunner {
+
+        @Override
+        public void run(String... args) throws Exception {
+            System.out.println(&#34;He said: Hello, how are you ?&#34;);
+        }
+    }
+
+    @Component
+    @Order(2)
+    class GreetingReply implements CommandLineRunner {
+
+        @Override
+        public void run(String... args) throws Exception {
+            System.out.println(&#34;She replied: I am doing good..thanks for asking!&#34;);
+        }
+    }
+
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;When we run this application, the following output is printed on console.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;....
+He said: Hello, how are you ?
+She replied: I am doing good..thanks for asking! :
+....&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;In this article, we saw how to use &lt;code&gt;CommandLineRunner&lt;/code&gt; interface. It is very usefull when we don&amp;#8217;t have any UI to trigger something or we want something to execute just after the application context is up.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

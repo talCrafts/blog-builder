@@ -11,7 +11,7 @@ title = "Edge Computing"
 
 **Introduction**
 
-Waves of changes in technology is cycling just like fashion cycles, old becomes new and new becomes old in cycle fasion. Same applies to technology in terms of Server to Client and Client to Server. In this I refer server which is away from end user and client is compute device near to end User.
+Waves of changes in technology is cycling just like fashion cycles, old becomes new and new becomes old in cycle fashion. Same applies to technology in terms of Server to Client and Client to Server. In this I refer server which is away from end user and client is compute device near to end User.
 
 Now if we dare to look beyond Cloud era, what do you think will be possible if we try to predict future by looking at past.  Well I can think of Edge or Fog Computing.
 

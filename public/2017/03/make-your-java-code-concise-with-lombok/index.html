@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.18.1" />
+    <title>Make your Java code concise with Lombok</title>
+    
+    
+    
+    <meta name="description" content="This explain the usage of Lombok library in Java projects" />
+    <meta name="keywords" content='Java,Lombok' />
+    
+        <meta name="author" content="Imteyaz Ahmad" />
+    
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="TalCrafts Blog" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/highlightjs-themes/androidstudio.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/phlat.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/mdb.min.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/style.css" />
+    
+        
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({
+                    google_ad_client: "ca-pub-XXXXXX",
+                    enable_page_level_ads: true
+                });
+            </script>
+        
+    
+</head>
+
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">TalCrafts Blog</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about/">
+                            About
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+        <div id="top" class="container">
+            <div class="row" id="content-main">
+                <div class="col-md-8">
+                    <div class="row">
+    <div class="col-md-12 content-card">
+        <h1>Make your Java code concise with Lombok</h1>
+        
+            
+            <ul class="list-inline meta">
+                <li><i class="fa fa-calendar"></i>March 13, 2017</li>
+                <li><i class="fa fa-user"></i>Imteyaz Ahmad</li>
+                
+                    
+                    <li><i class="fa fa-folder"></i><a href="http://www.talcrafts.com/categories/java">Java</a></li>
+                
+            </ul>
+        
+        
+    <ul class="list-inline share" style="margin-top: 15px; margin-left: 0px">
+        <li class="facebook-share"><a target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2fmake-your-java-code-concise-with-lombok%2f"><i class="fa fa-facebook fa-lg"></i>Facebook</a></li>
+        <li class="googleplus-share"><a target="_blank" href="https://plus.google.com/share?url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2fmake-your-java-code-concise-with-lombok%2f"><i class="fa fa-google-plus fa-lg"></i>Google+</a></li>
+        <li class="twitter-share"><a target="_blank" href="https://twitter.com/share?url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2fmake-your-java-code-concise-with-lombok%2f&amp;text=Make%20your%20Java%20code%20concise%20with%20Lombok"><i class="fa fa-twitter fa-lg"></i>Twitter</a></li>
+        <li class="reddit-share"><a target="_blank" href="http://reddit.com/submit?url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2fmake-your-java-code-concise-with-lombok%2f&amp;title=Make%20your%20Java%20code%20concise%20with%20Lombok"><i class="fa fa-reddit fa-lg"></i>Reddit</a></li>
+        <li class="linkedin-share"><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2fmake-your-java-code-concise-with-lombok%2f"><i class="fa fa-linkedin fa-lg"></i>LinkedIn</a></li>
+        <li class="stumbleupon-share"><a target="_blank" href="http://www.stumbleupon.com/submit?url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2fmake-your-java-code-concise-with-lombok%2f&amp;title=Make%20your%20Java%20code%20concise%20with%20Lombok"><i class="fa fa-stumbleupon fa-lg"></i>StumbleUpon</a></li>
+    </ul>
+
+
+        <div class="paragraph">
+<p><strong>Introduction</strong></p>
+</div>
+<div class="paragraph">
+<p>In every so called plain-old-java-object(POJO), each instance property has <code>getter</code> and <code>setter</code> methods. We can write these methods by ourselves or can generate them using any IDE(like Eclipse, IntelliJ). Apart from these accessor and mutator methods, we have to write <code>toString()</code>, <code>hashCode()</code> and <code>equals()</code> methods. These methods make class look cluttered. Using Lombok, We can generate these methods simply by using annotations.</p>
+</div>
+<div class="paragraph">
+<p>
+<strong>Installing Lombok</strong></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Eclipse</em></strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download Lombok from
+<a href="https://projectlombok.org/download.html" class="bare">https://projectlombok.org/download.html</a>.</p>
+</li>
+<li>
+<p>Run it by double clicking on it or by firing java -jar lombok.jar.</p>
+</li>
+<li>
+<p>It will open an explorer window like shown as below:
+<span class="image"><img src=" /img/lombok_screen1.png" alt="Lombok"></span></p>
+</li>
+<li>
+<p>Point to folder containing Eclipse by clicking Specify Location..</p>
+</li>
+<li>
+<p>After that, click on Install/Update</p>
+</li>
+<li>
+<p>Once installation is done&#8230;&#8203;add Lombok dependency in the project and restart Eclipse.
+If it is not working then, you have to start Eclipse by firing <code>$ECLIPSE_HOME/eclipse --clean</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong><em>IntelliJ</em></strong></p>
+</div>
+<div class="paragraph">
+<p>Here is a plugin and installation instructions <a href="https://github.com/mplushnikov/lombok-intellij-plugin" class="bare">https://github.com/mplushnikov/lombok-intellij-plugin</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Using Lombok</strong></p>
+</div>
+<div class="paragraph">
+<p>Add <code>lombok.jar</code> in your Java project, either using Maven, Gradle or any other build tools. Below is a sample <code>build.gradle</code> file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>dependencies {
+    ........
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
+    ........
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Annotations Provided by Lombok</strong></p>
+</div>
+<div class="paragraph">
+<p><strong><em>@Getter and @Setter</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.imti.lombok;
+@Getter
+@Setter
+public class GetterSetterLombok {
+    private String name;
+    private String message;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will generate <code>public</code> getter/setter for every non-static field. If you want to define access level, it can be done by specifying <code>AccessLevel</code></p>
+</div>
+<div class="paragraph">
+<p>e.g.: <code>@Setter(AccessLevel.PROTECTED) private String name;</code></p>
+</div>
+<div class="paragraph">
+<p>If you do NOT want to generate getter/setter for a particular field, then you can disable it by invoking <code>AccessLevel.NONE</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.imti.lombok;
+@Getter
+@Setter
+public class GetterSetterLombok {
+    @Setter(AccessLevel.NONE)
+    private Long id;
+    private String name;
+    private String message;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>@ToString</em></strong></p>
+</div>
+<div class="paragraph">
+<p>By default, all non-static field will be included. If you want to exclude any, define them in <code>exclude</code> parameter.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.imti.lombok;
+//This will print value of
+all fields except id (excluded) and STATIC_VAR(static field).
+/* created by imteyaza on 6/8/2016 */
+@ToString(exclude="id")
+public class HelloLombok {
+	private static final int STATIC_VAR=10;
+	private String id;
+	private String name;
+	private String message;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is test class for the same.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class HelloLombokTest {
+    @Test
+    public void testToString(){
+        HelloLombok helloLombok = new HelloLombok();
+        helloLombok.setId("imti");
+        helloLombok.setMessage("Hello Lombok!");
+        helloLombok.setName("Imteyaz");
+        System.out.println(helloLombok.toString());
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output of this test is:<br>
+<code>HelloLombok(name=Imteyaz, message=Hello Lombok!)</code></p>
+</div>
+<div class="paragraph">
+<p>Note: If you, by mistake, typed name of non-existing field, it will generate a warning!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.imti.lombok;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+//Created by imteyaza on 3/8/16.
+@Getter
+@Setter
+@ToString(exclude = {"id", "name","hell"})
+public class HelloLombok {
+    private static final int VALUE = 10;
+    private String id;
+    private String name;
+    private String message;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will generate a warning <code>The field 'hell' does not exist</code></p>
+</div>
+<div class="paragraph">
+<p><strong><em>@Log</em></strong></p>
+</div>
+<div class="paragraph">
+<p>For using any logging library, configure it as per the instructions by provider,then use it&#8217;s annotation. for example for Log4j2, we will use <code>@Log4j2</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Log4j2
+public class HelloWorld {
+	private String name;
+	public static void main(String args []){
+		log.info("Inside the main method");
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It creates following line for you<br>
+<code>private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(HelloWorld.class);</code></p>
+</div>
+<div class="paragraph">
+<p>For other supported logging library, please refer to <a href="https://projectlombok.org/features/Log.html" class="bare">https://projectlombok.org/features/Log.html</a></p>
+</div>
+<div class="paragraph">
+<p><strong><em>@Cleanup (My favourite)</em></strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.imti.lombok;
+import lombok.Cleanup;
+import java.io.*;
+//Created by imteyaza on 3/8/16.
+public class ResourceCleanupLombok {
+    public void readFile(String inputFileName, String outputFileName)
+        throws IOException {
+        @Cleanup InputStream inputStream = new FileInputStream(inputFileName);
+        @Cleanup OutputStream outputStream = new FileOutputStream(outputFileName);
+        byte[] buffer = new byte[1024];
+        while (true) {
+            int line = inputStream.read(buffer);
+            if (line == -1) {
+                break;
+            }
+            outputStream.write(buffer, 0, line);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default it looks for a method called <code>close()</code> in the type of Object you are cleaning up.If you have a custom method name, it can called as <code>@Cleanup("destroy")</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>The destroy() method must be a non-argument method.</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong><em>@EqualsAndHashCode</em></strong></p>
+</div>
+<div class="paragraph">
+<p>If a class is annotated with @EqualsAndHashCode,it will use all non-static fields, by default.<br>
+If you want to exclude some parameter, it can be done by defining <code>exclude={"&lt;field name&gt;"}</code>. If the <code>&lt;field name&gt;</code> does not exist, it will generate a warning.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.imti.lombok;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+//Created by imteyaza on 5/8/16.
+@EqualsAndHashCode(exclude = {"id","name","hell"})
+@Getter
+@Setter
+@ToString
+public class EqualAndHashcodeExample {
+    private static int COUNTER = 10;
+    private String id;
+    private String name;
+    private String message;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will generate a warning <code>The field 'hell' does not exist</code></p>
+</div>
+<div class="paragraph">
+<p><strong><em>@NoArgsConstructor, @RequiredArgsConstructor, @AllArgsConstructor</em></strong></p>
+</div>
+<div class="paragraph">
+<p><em>@NoArgsConstructor:</em> generates default or no-arguments constructor for the class.
+<em>@RequiredArgsConstructor:</em> creates a constructor with 1 parameter for each non-initialized final field.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.imti.lombok;
+import lombok.*;
+//Created by imteyaza on 6/8/16.
+@Getter
+@Setter
+@ToString(exclude = {"id", "name"})
+@RequiredArgsConstructor
+public class HelloLombok {
+    private static final int VALUE = 10;
+    private String id;
+    private String name;
+    private final String message;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>will generate a class like below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package com.imti.lombok;
+import lombok.*;
+// Created by imteyaza on 6/8/16.
+public class HelloLombok {
+    private static final int VALUE = 10;
+    private String id;
+    private String name;
+    private final String message;
+    //Other codes omitted for brevity
+    public HelloLombok(final String message) {
+        this.message = message;
+    }
+    //Other codes omitted for brevity
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><em>@AllArgsConstructor:</em> will create a constructor with all fields.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>@Data</em></strong></p>
+</div>
+<div class="paragraph">
+<p>It bundles @Getter/@Setter, @ToString, @EqualsAndHashCode and @RequiredArgsConstructor.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>Conclusion</em></strong>
+These were some of the features provided by Lombok. Here is a link to list of all features-
+<code><a href="https://projectlombok.org/features/index.html" class="bare">https://projectlombok.org/features/index.html</a></code></p>
+</div>
+<div class="paragraph">
+<p><strong>References</strong></p>
+</div>
+<div class="paragraph">
+<p><em>Lombok Project Page:</em>  <a href="https://projectlombok.org/index.html" class="bare">https://projectlombok.org/index.html</a></p>
+</div>
+<div class="paragraph">
+<p><em>Download and installation instructions:</em> <a href="https://projectlombok.org/download.html" class="bare">https://projectlombok.org/download.html</a></p>
+</div>
+<div class="paragraph">
+<p><em>IntelliJ plugin and installation instructions:</em> <a href="https://github.com/mplushnikov/lombok-intellij-plugin" class="bare">https://github.com/mplushnikov/lombok-intellij-plugin</a></p>
+</div>
+<div class="paragraph">
+<p><em>Sample application:</em>
+<a href="https://github.com/ahmadimt/JavaWithLombok" class="bare">https://github.com/ahmadimt/JavaWithLombok</a></p>
+</div>
+        
+    <ul class="list-inline tags" style="margin-top: 15px; margin-left: 0px">
+        
+            <li style=""><a href="http://www.talcrafts.com/tags/java">Java</a></li>
+        
+            <li style=""><a href="http://www.talcrafts.com/tags/lombok">Lombok</a></li>
+        
+    </ul>
+
+
+    </div>
+</div>
+
+                    
+    
+        <div class="row">
+            <div class="col-md-12 content-card">
+                <div id="disqus_thread"></div>
+                <script>
+                    (function() {
+                        if (window.location.hostname == "localhost") {
+                            document.write("Disqus comments are unavailable while serving on localhost or 127.0.0.1");
+                            return;
+                        }
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        var disqus_shortname = 'talcraft-blog';
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+    
+
+
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+    <div class="col-md-11 col-md-offset-1 card">
+        <h5>Search</h5>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+            <div class="input-group">
+                <input class="form-control" type="search" name="q" />
+                <span class="input-group-btn">
+                    <button class="btn btn-custom" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+            <input type="hidden" name="q" value="site:http://www.talcrafts.com/">
+        </form>
+    </div>
+</div>
+
+                    <div class="row">
+    <div class="col-md-11 col-md-offset-1 card">
+        <h5>Recent Posts</h5>
+        <ul class="list-unstyled posts-recent">
+            
+                <li><a href="http://www.talcrafts.com/2017/03/elasticsearch-dynamic-mapping/">Elasticsearch Dynamic Mapping</a></li>
+            
+                <li><a href="http://www.talcrafts.com/2017/03/edge-computing/">Edge Computing</a></li>
+            
+                <li><a href="http://www.talcrafts.com/2017/03/make-your-java-code-concise-with-lombok/">Make your Java code concise with Lombok</a></li>
+            
+                <li><a href="http://www.talcrafts.com/2017/03/create-a-static-website-with-hugo-and-host-it-with-github-pages/">Create a static website with Hugo and Host it with Github Pages</a></li>
+            
+                <li><a href="http://www.talcrafts.com/2017/03/spring-boot-commandlinerunner-interface/">Spring boot CommandLineRunner Interface</a></li>
+            
+        </ul>
+    </div>
+</div>
+
+                    
+    
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1 card">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-XXXXXX"
+                    data-ad-slot="9997956765"
+                    data-ad-format="auto">
+                </ins>
+            </div>
+        </div>
+    
+
+
+                    
+    
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1 card">
+                <h5>categories</h5>
+                <ul class="list-unstyled posts-recent">
+                    
+                        <li><a href="http://www.talcrafts.com/categories/blog">blog</a></li>
+                    
+                        <li><a href="http://www.talcrafts.com/categories/edge-computing">edge-computing</a></li>
+                    
+                        <li><a href="http://www.talcrafts.com/categories/elasticsearch">elasticsearch</a></li>
+                    
+                        <li><a href="http://www.talcrafts.com/categories/java">java</a></li>
+                    
+                        <li><a href="http://www.talcrafts.com/categories/spring">spring</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    
+
+    
+
+
+                    <div class="row">
+    <div class="col-md-11 col-md-offset-1 card">
+        <h5>Support This Site</h5>
+        <p>
+            If my blog was helpful to you, then please consider visiting my
+            <a href="#">Amazon Wishlist</a> or donating via <a href="#">Paypal</a> 
+            or <a href="#">Square Cash</a> 
+        </p>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xs-6">
+    <ul class="list-inline links">
+        
+            <li>
+                <a href="/privacy-policy/">
+                    Privacy Policy
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            <div class="col-md-4 col-xs-6">
+    <ul class="list-inline social-media">
+        
+            <li><a target="_blank" href="https://www.twitter.com/ahmad_imt"><i class="fa fa-twitter fa-lg"></i></a></li>
+        
+        
+            <li><a target="_blank" href="https://plus.google.com/102515715683203655738"><i class="fa fa-google-plus-square fa-lg"></i></a></li>
+        
+        
+        
+            <li><a target="_blank" href="https://www.linkedin.com/in/imteyaz-ahmad-09b66b28"><i class="fa fa-linkedin fa-lg"></i></a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <a href="https://github.com/nraboy/hugo-phlat-theme">Phlat Theme</a> designed and built by <a href="http://www.nraboy.com">Nic Raboy</a> in San Francisco, California.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        <div id="back-to-top" class="hidden">
+    <a href="#top" class="well well-sm" onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+        <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
+    </a>
+</div>
+<script src="http://www.talcrafts.com/js/jquery-2.2.1.min.js"></script>
+<script src="http://www.talcrafts.com/js/tether.min.js"></script>
+<script src="http://www.talcrafts.com/js/bootstrap.min.js"></script>
+<script src="http://www.talcrafts.com/js/mdb.min.js"></script>
+<script src="http://www.talcrafts.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>
+    if(($(window).height() + 100) < $(document).height()) {
+        $('#back-to-top').removeClass('hidden').affix({
+            offset: {
+                top: 100
+            }
+        });
+    }
+</script>
+
+    
+        <script>
+            
+            [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            });
+        </script>
+    
+
+
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-93463562-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+
+    </body>
+</html>

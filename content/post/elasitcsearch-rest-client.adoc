@@ -1,0 +1,38 @@
++++
+description = "This post explains about using Elasticsearch Java REST client"
+draft = true
+date = "2017-03-25T07:22:38+05:30"
+title = "Using Elasitcsearch Java REST client-part I"
+categories = ["Elasticsearch","Java"]
+tags = ["Elasticsearch","Java"]
+author = "Imteyaz Ahmad"
+
++++
+
+*Introduction*
+
+Elasticseach provides two types of Java clients:
+
+- _Native Elasticseach binary protocol:_ This is custom protocol developed by Elasticsearch itself for inter-node communication. There are two choices here- Node client and Transport client.
+
+If you want to learn more about it, please refer https://www.elastic.co/guide/en/elasticsearch/guide/2.x/_transport_client_versus_node_client.html[Elasticsearch definite guide] or https://www.elastic.co/blog/found-interfacing-elasticsearch-picking-client[this blog]. Also, apart from these, there are plenty of materials available out there on internet.
+
+<!--more-->
+
+- _REST API over HTTP:_ In this, the user sends a REST request to an Elasticsearch node in JSON format. The request body is parsed and converted to Java object by coordinating node. From then onwards, all the communication happens in binary format- same as native Elasticsearch binary protocol.
+
+In this post, we will learn more about using REST client.
+
+*Getting Started*
+
+1. Create a Java project using Gradle: `gradle init --type java-application --test-framework spock`. This create a bare bone Java application with Spock as testing framework. We will write our unit test cases in Spock framework.
+
+2. Add following dependency in `build.gradle` file:
+
+[source,java]
+----
+compile 'org.elasticsearch.client:rest:5.2.2'
+----
+
+[start=3]
+3. Run `./gradlew clean build`  from the root of the project. This will download any missing dependencies and build application

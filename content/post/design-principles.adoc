@@ -1,0 +1,20 @@
++++
+categories = ["Design Pattern"]
+tags = ["SOLID"]
+author = "Imteyaz Ahmad"
+description = "It describes about SOLID design principles"
+draft = true
+date = "2017-03-25T17:27:27+05:30"
+title = "SOLID Principles"
+
++++
+
+*Introduction*
+
+SOLID is a acronym for Single 
+
+<!--more-->
+
+=== SOLID principles
+asdadsad
+asdadad

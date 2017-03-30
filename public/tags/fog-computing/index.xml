@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fog Computing on TalCrafts Blog</title>
+    <link>http://www.talcrafts.com/tags/fog-computing/index.xml</link>
+    <description>Recent content in Fog Computing on TalCrafts Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://www.talcrafts.com/tags/fog-computing/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Edge Computing</title>
+      <link>http://www.talcrafts.com/2017/03/edge-computing/</link>
+      <pubDate>Wed, 22 Mar 2017 20:14:19 +0530</pubDate>
+      
+      <guid>http://www.talcrafts.com/2017/03/edge-computing/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Waves of changes in technology is cycling just like fashion cycles, old becomes new and new becomes old in cycle fasion. Same applies to technology in terms of Server to Client and Client to Server. In this I refer server which is away from end user and client is compute device near to end User.&lt;/p&gt;
+
+&lt;p&gt;Now if we dare to look beyond Cloud era, what do you think will be possible if we try to predict future by looking at past.  Well I can think of Edge or Fog Computing.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What&amp;rsquo;s it ?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In simple words, Edge or Fog Computing means pushing intelligence towards end nodes of network.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Forces Behind Edge Computing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;IoT:-&lt;/em&gt;  Now a days, IoT is enabled on almost every device which generated a lot of data. The genearted data is going to increase many fold as more and more device will get connected to Internet of Everything. This will put a lot of pressure on centralized infrastructure. Hence, it pushes the compute to be done on end user devices.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Unreliable Network:-&lt;/em&gt;  Also newtork connectivity to these devices may not be as reliable and hence they have to work equaly well in both- online/offline mode .&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Low cost and more compute capabilities of end user devices:-&lt;/em&gt;  Another reason is the cost of these devices is gettting lower and lower and amount of compute offered by them is increasing many fold. Economically it will be foolish not use power available at end nodes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Puting this all togther will move us to new era of Edge Computing just like PC took Mainframes. Again they will complement Cloud insted of replacing it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Further Reading&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.openfogconsortium.org/resources/&#34;&gt;https://www.openfogconsortium.org/resources/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

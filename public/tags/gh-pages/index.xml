@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gh Pages on TalCrafts Blog</title>
+    <link>http://www.talcrafts.com/tags/gh-pages/index.xml</link>
+    <description>Recent content in Gh Pages on TalCrafts Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://www.talcrafts.com/tags/gh-pages/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Create a static website with Hugo and Host it with Github Pages</title>
+      <link>http://www.talcrafts.com/2017/03/create-a-static-website-with-hugo-and-host-it-with-github-pages/</link>
+      <pubDate>Sun, 12 Mar 2017 17:37:02 +0530</pubDate>
+      
+      <guid>http://www.talcrafts.com/2017/03/create-a-static-website-with-hugo-and-host-it-with-github-pages/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Indroduction&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;In this article we will explain how to create a blog site with minimum cost and with absolutely no hosting server of our own.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Tools Used&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; : A fast and modern static website engine.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Any text editor of your choice. I prefer &lt;a href=&#34;https://atom.io/&#34;&gt;Atom&lt;/a&gt; because of its plugeable architecture and its in-built support for editing and previewing mark-down files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Steps Followed&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Download and install &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;. More details provided in &lt;a href=&#34;https://gohugo.io/overview/installing/&#34;&gt;getting started&lt;/a&gt; guide of Hugo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once Hugo is installed, open a terminal and go the folder where you want to keep the code for your blog or static website.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run  &lt;code&gt;hugo new site &amp;lt;your-site-name&amp;gt;&lt;/code&gt; to create a new website. It will create following directories in the folder:&lt;/p&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code&gt;    ----
+    ├── archetypes
+    ├── config.toml
+    ├── content
+    ├── data
+    ├── layouts
+    ├── public
+    ├── static
+    └── themes
+    ----&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now go to &lt;a href=&#34;http://themes.gohugo.io/&#34; class=&#34;bare&#34;&gt;http://themes.gohugo.io/&lt;/a&gt; and clone a theme of your choice in &lt;code&gt;themes&lt;/code&gt; folder.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once done, copy the &lt;code&gt;config.toml&lt;/code&gt; from the downloaded theme into the root folder of the the website and run &lt;code&gt;hugo server --buildDrafts&lt;/code&gt; from the root directory. It will start the server on port 1313. You can access the site from &lt;code&gt;&lt;a href=&#34;http://localhost:1313&#34; class=&#34;bare&#34;&gt;http://localhost:1313&lt;/a&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To create a new blog entry, run &lt;code&gt;hugo new post/&amp;lt;blog-file-name&amp;gt;.md&lt;/code&gt;. It will create a file in &lt;code&gt;content/post/&lt;/code&gt; folder.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open the newly created file in any of the editor and start writing the content of the blog.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you are done with your content, delete content of &lt;code&gt;public&lt;/code&gt; folder and run &lt;code&gt;hugo&lt;/code&gt; command to regenerate the files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a repo on &lt;a href=&#34;https://github.com&#34;&gt;Github&lt;/a&gt; and check in the content of the &lt;code&gt;public&lt;/code&gt; folder.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now go to you repository on &lt;a href=&#34;https://github.com&#34; class=&#34;bare&#34;&gt;https://github.com&lt;/a&gt; and create a new branch called &lt;code&gt;gh-pages&lt;/code&gt;. Click on &lt;code&gt;settings&lt;/code&gt; and go to &lt;code&gt;GitHub Pages&lt;/code&gt; section of the page, you will see a message like &lt;code&gt;Your site is published at &lt;a href=&#34;https://&amp;lt;user_name&amp;gt;.github.io/&amp;lt;repo-name&amp;gt;/&#34; class=&#34;bare&#34;&gt;https://&amp;lt;user_name&amp;gt;.github.io/&amp;lt;repo-name&amp;gt;/&lt;/a&gt;&lt;/code&gt;. You can use this link to access your static website or blog.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;If you want to use custom domain please follow &lt;a href=&#34;https://help.github.com/articles/using-a-custom-domain-with-github-pages/&#34;&gt;this&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;I have included some links that can be helpful while following these steps. Please feel free to ask any questions or help.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Any feedbacks or suggestions will be greatly appreciated.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://gohugo.io/&#34; class=&#34;bare&#34;&gt;https://gohugo.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://atom.io/&#34; class=&#34;bare&#34;&gt;https://atom.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://help.github.com/articles/using-a-custom-domain-with-github-pages/&#34; class=&#34;bare&#34;&gt;https://help.github.com/articles/using-a-custom-domain-with-github-pages/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

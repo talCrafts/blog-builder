@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.18.1" />
+    <title>Elasticsearch Dynamic Mapping</title>
+    
+    
+    
+    <meta name="description" content="This blog talks about Elasticsearch dynamic templates" />
+    <meta name="keywords" content='Elasticsearch' />
+    
+        <meta name="author" content="Imteyaz Ahmad" />
+    
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="TalCrafts Blog" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/highlightjs-themes/androidstudio.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/phlat.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/mdb.min.css" />
+    <link rel="stylesheet" href="http://www.talcrafts.com/css/style.css" />
+    
+        
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({
+                    google_ad_client: "ca-pub-XXXXXX",
+                    enable_page_level_ads: true
+                });
+            </script>
+        
+    
+</head>
+
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">TalCrafts Blog</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about/">
+                            About
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+        <div id="top" class="container">
+            <div class="row" id="content-main">
+                <div class="col-md-8">
+                    <div class="row">
+    <div class="col-md-12 content-card">
+        <h1>Elasticsearch Dynamic Mapping</h1>
+        
+            
+            <ul class="list-inline meta">
+                <li><i class="fa fa-calendar"></i>March 22, 2017</li>
+                <li><i class="fa fa-user"></i>Imteyaz Ahmad</li>
+                
+                    
+                    <li><i class="fa fa-folder"></i><a href="http://www.talcrafts.com/categories/elasticsearch">Elasticsearch</a></li>
+                
+            </ul>
+        
+        
+    <ul class="list-inline share" style="margin-top: 15px; margin-left: 0px">
+        <li class="facebook-share"><a target="_blank" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2felasticsearch-dynamic-mapping%2f"><i class="fa fa-facebook fa-lg"></i>Facebook</a></li>
+        <li class="googleplus-share"><a target="_blank" href="https://plus.google.com/share?url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2felasticsearch-dynamic-mapping%2f"><i class="fa fa-google-plus fa-lg"></i>Google+</a></li>
+        <li class="twitter-share"><a target="_blank" href="https://twitter.com/share?url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2felasticsearch-dynamic-mapping%2f&amp;text=Elasticsearch%20Dynamic%20Mapping"><i class="fa fa-twitter fa-lg"></i>Twitter</a></li>
+        <li class="reddit-share"><a target="_blank" href="http://reddit.com/submit?url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2felasticsearch-dynamic-mapping%2f&amp;title=Elasticsearch%20Dynamic%20Mapping"><i class="fa fa-reddit fa-lg"></i>Reddit</a></li>
+        <li class="linkedin-share"><a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2felasticsearch-dynamic-mapping%2f"><i class="fa fa-linkedin fa-lg"></i>LinkedIn</a></li>
+        <li class="stumbleupon-share"><a target="_blank" href="http://www.stumbleupon.com/submit?url=http%3a%2f%2fwww.talcrafts.com%2f2017%2f03%2felasticsearch-dynamic-mapping%2f&amp;title=Elasticsearch%20Dynamic%20Mapping"><i class="fa fa-stumbleupon fa-lg"></i>StumbleUpon</a></li>
+    </ul>
+
+
+        <div class="paragraph">
+<p><strong>Introduction</strong></p>
+</div>
+<div class="paragraph">
+<p>In Elasticsearch, it is not neccessary to create an index, define mapping before hand and then index a document. For example, We can create a document of type <code>post</code> in an index called <code>blog</code> in Elasticseach by just firing following command:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT blog/post/1
+{
+  "author": "Imteyaz",
+  "age": 30,
+  "post_date": "2017-03-21",
+  "description": "2017-03-21"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Elasticsearch automatically detects and add new types and fields. This is called <em>dynamic mapping</em>. It is a great feature as it helps in getting started fast. However this can be problematic sometimes. Let&#8217;s have a look on the <em>mapping</em> generated by Elasticsearch for the document.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">GET blog/_mapping
+// Result
+{
+  "blog": {
+    "mappings": {
+      "post": {
+        "properties": {
+          "age": {
+            "type": "long"
+          },
+          "author": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "description": {
+            "type": "date"
+          },
+          "post_date": {
+            "type": "date"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the type of <code>description</code> field is <code>date</code> which is not desired. To prevent such thing, we can either disable <code>date_detection</code> or we can define a custom dynamic template.</p>
+</div>
+<div class="paragraph">
+<p><strong>Disable Date Detection</strong></p>
+</div>
+<div class="paragraph">
+<p>Dynamic date detection can be disbled by setting <code>date_detection</code> to <code>false</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT blog/_mapping/post
+{
+    "date_detection": false
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Define Custom Template</strong></p>
+</div>
+<div class="paragraph">
+<p>We can define our own dynamic template and create it as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT _template/idx_template
+{
+    "template": "blog*",
+    "settings": {
+        "number_of_shards": 5,
+        "number_of_replicas": 1
+    },
+    "analysis": {
+        "analyzer": {
+            "mc_analyzer": {
+                "type": "standard",
+                "stopwords": "_english_"
+            }
+        }
+    },
+    "mappings": {
+        "post": {
+          "date_detection": false,
+            "dynamic_templates": [{
+                "date_fields": {
+                    "match": "*_date",
+                    "mapping":{
+                        "type": "date"
+                    }
+                }
+
+            }]
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This template applies to any index whose name start with <code>blog</code>. Here we have disabled date detection and explicitely mapping our field as date that contains <code>_date</code> in it.</p>
+</div>
+<div class="paragraph">
+<p>Now let us create the <code>blog</code> index again and see the mapping generated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">PUT blog/post/1
+{
+  "author": "Imteyaz",
+  "age": 30,
+  "post_date": "2017-03-21",
+  "description": "2017-03-21"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Below is the new mapping generated by Elasticsearch:</p>
+</div>
+<div class="listingblock json">
+<div class="content">
+<pre class="highlight"><code>{
+  "blog": {
+    "mappings": {
+      "post": {
+        "dynamic_templates": [
+          {
+            "date_fields": {
+              "match": "*_date",
+              "mapping": {
+                "type": "date"
+              }
+            }
+          }
+        ],
+        "date_detection": false,
+        "properties": {
+          "age": {
+            "type": "long"
+          },
+          "author": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "description": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "post_date": {
+            "type": "date"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the new mapping created, the  <code>description</code> field is a <code>text</code> and <code>post_date</code> is a <code>date</code> field.</p>
+</div>
+<div class="paragraph">
+<p><strong>Conclusion</strong></p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s better to create a template for index if we don&#8217;t know new fields to be added in future and if somehow we can control the field name.</p>
+</div>
+<div class="paragraph">
+<p><strong>References</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html" class="bare">https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html</a></p>
+</li>
+<li>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html" class="bare">https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html</a></p>
+</li>
+</ul>
+</div>
+        
+    <ul class="list-inline tags" style="margin-top: 15px; margin-left: 0px">
+        
+            <li style=""><a href="http://www.talcrafts.com/tags/elasticsearch">Elasticsearch</a></li>
+        
+    </ul>
+
+
+    </div>
+</div>
+
+                    
+    
+        <div class="row">
+            <div class="col-md-12 content-card">
+                <div id="disqus_thread"></div>
+                <script>
+                    (function() {
+                        if (window.location.hostname == "localhost") {
+                            document.write("Disqus comments are unavailable while serving on localhost or 127.0.0.1");
+                            return;
+                        }
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        var disqus_shortname = 'talcraft-blog';
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+    
+
+
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+    <div class="col-md-11 col-md-offset-1 card">
+        <h5>Search</h5>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+            <div class="input-group">
+                <input class="form-control" type="search" name="q" />
+                <span class="input-group-btn">
+                    <button class="btn btn-custom" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+            <input type="hidden" name="q" value="site:http://www.talcrafts.com/">
+        </form>
+    </div>
+</div>
+
+                    <div class="row">
+    <div class="col-md-11 col-md-offset-1 card">
+        <h5>Recent Posts</h5>
+        <ul class="list-unstyled posts-recent">
+            
+                <li><a href="http://www.talcrafts.com/2017/03/elasticsearch-dynamic-mapping/">Elasticsearch Dynamic Mapping</a></li>
+            
+                <li><a href="http://www.talcrafts.com/2017/03/edge-computing/">Edge Computing</a></li>
+            
+                <li><a href="http://www.talcrafts.com/2017/03/make-your-java-code-concise-with-lombok/">Make your Java code concise with Lombok</a></li>
+            
+                <li><a href="http://www.talcrafts.com/2017/03/create-a-static-website-with-hugo-and-host-it-with-github-pages/">Create a static website with Hugo and Host it with Github Pages</a></li>
+            
+                <li><a href="http://www.talcrafts.com/2017/03/spring-boot-commandlinerunner-interface/">Spring boot CommandLineRunner Interface</a></li>
+            
+        </ul>
+    </div>
+</div>
+
+                    
+    
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1 card">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-XXXXXX"
+                    data-ad-slot="9997956765"
+                    data-ad-format="auto">
+                </ins>
+            </div>
+        </div>
+    
+
+
+                    
+    
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1 card">
+                <h5>categories</h5>
+                <ul class="list-unstyled posts-recent">
+                    
+                        <li><a href="http://www.talcrafts.com/categories/blog">blog</a></li>
+                    
+                        <li><a href="http://www.talcrafts.com/categories/edge-computing">edge-computing</a></li>
+                    
+                        <li><a href="http://www.talcrafts.com/categories/elasticsearch">elasticsearch</a></li>
+                    
+                        <li><a href="http://www.talcrafts.com/categories/java">java</a></li>
+                    
+                        <li><a href="http://www.talcrafts.com/categories/spring">spring</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    
+
+    
+
+
+                    <div class="row">
+    <div class="col-md-11 col-md-offset-1 card">
+        <h5>Support This Site</h5>
+        <p>
+            If my blog was helpful to you, then please consider visiting my
+            <a href="#">Amazon Wishlist</a> or donating via <a href="#">Paypal</a> 
+            or <a href="#">Square Cash</a> 
+        </p>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xs-6">
+    <ul class="list-inline links">
+        
+            <li>
+                <a href="/privacy-policy/">
+                    Privacy Policy
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            <div class="col-md-4 col-xs-6">
+    <ul class="list-inline social-media">
+        
+            <li><a target="_blank" href="https://www.twitter.com/ahmad_imt"><i class="fa fa-twitter fa-lg"></i></a></li>
+        
+        
+            <li><a target="_blank" href="https://plus.google.com/102515715683203655738"><i class="fa fa-google-plus-square fa-lg"></i></a></li>
+        
+        
+        
+            <li><a target="_blank" href="https://www.linkedin.com/in/imteyaz-ahmad-09b66b28"><i class="fa fa-linkedin fa-lg"></i></a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <a href="https://github.com/nraboy/hugo-phlat-theme">Phlat Theme</a> designed and built by <a href="http://www.nraboy.com">Nic Raboy</a> in San Francisco, California.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        <div id="back-to-top" class="hidden">
+    <a href="#top" class="well well-sm" onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+        <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
+    </a>
+</div>
+<script src="http://www.talcrafts.com/js/jquery-2.2.1.min.js"></script>
+<script src="http://www.talcrafts.com/js/tether.min.js"></script>
+<script src="http://www.talcrafts.com/js/bootstrap.min.js"></script>
+<script src="http://www.talcrafts.com/js/mdb.min.js"></script>
+<script src="http://www.talcrafts.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>
+    if(($(window).height() + 100) < $(document).height()) {
+        $('#back-to-top').removeClass('hidden').affix({
+            offset: {
+                top: 100
+            }
+        });
+    }
+</script>
+
+    
+        <script>
+            
+            [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            });
+        </script>
+    
+
+
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-93463562-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+
+    </body>
+</html>

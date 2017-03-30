@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on TalCrafts Blog</title>
+    <link>http://www.talcrafts.com/categories/java/index.xml</link>
+    <description>Recent content in Java on TalCrafts Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://www.talcrafts.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Make your Java code concise with Lombok</title>
+      <link>http://www.talcrafts.com/2017/03/make-your-java-code-concise-with-lombok/</link>
+      <pubDate>Mon, 13 Mar 2017 16:47:50 +0530</pubDate>
+      
+      <guid>http://www.talcrafts.com/2017/03/make-your-java-code-concise-with-lombok/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;In every so called plain-old-java-object(POJO), each instance property has &lt;code&gt;getter&lt;/code&gt; and &lt;code&gt;setter&lt;/code&gt; methods. We can write these methods by ourselves or can generate them using any IDE(like Eclipse, IntelliJ). Apart from these accessor and mutator methods, we have to write &lt;code&gt;toString()&lt;/code&gt;, &lt;code&gt;hashCode()&lt;/code&gt; and &lt;code&gt;equals()&lt;/code&gt; methods. These methods make class look cluttered. Using Lombok, We can generate these methods simply by using annotations.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;
+&lt;strong&gt;Installing Lombok&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Eclipse&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;olist arabic&#34;&gt;
+&lt;ol class=&#34;arabic&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Download Lombok from
+&lt;a href=&#34;https://projectlombok.org/download.html&#34; class=&#34;bare&#34;&gt;https://projectlombok.org/download.html&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run it by double clicking on it or by firing java -jar lombok.jar.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It will open an explorer window like shown as below:
+&lt;span class=&#34;image&#34;&gt;&lt;img src=&#34; /img/lombok_screen1.png&#34; alt=&#34;Lombok&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Point to folder containing Eclipse by clicking Specify Location..&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After that, click on Install/Update&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once installation is done&amp;#8230;&amp;#8203;add Lombok dependency in the project and restart Eclipse.
+If it is not working then, you have to start Eclipse by firing &lt;code&gt;$ECLIPSE_HOME/eclipse --clean&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;IntelliJ&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Here is a plugin and installation instructions &lt;a href=&#34;https://github.com/mplushnikov/lombok-intellij-plugin&#34; class=&#34;bare&#34;&gt;https://github.com/mplushnikov/lombok-intellij-plugin&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Using Lombok&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Add &lt;code&gt;lombok.jar&lt;/code&gt; in your Java project, either using Maven, Gradle or any other build tools. Below is a sample &lt;code&gt;build.gradle&lt;/code&gt; file.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code&gt;dependencies {
+    ........
+    compile group: &#39;org.projectlombok&#39;, name: &#39;lombok&#39;, version: &#39;1.16.10&#39;
+    ........
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Annotations Provided by Lombok&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;@Getter and @Setter&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.imti.lombok;
+@Getter
+@Setter
+public class GetterSetterLombok {
+    private String name;
+    private String message;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;This will generate &lt;code&gt;public&lt;/code&gt; getter/setter for every non-static field. If you want to define access level, it can be done by specifying &lt;code&gt;AccessLevel&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;e.g.: &lt;code&gt;@Setter(AccessLevel.PROTECTED) private String name;&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;If you do NOT want to generate getter/setter for a particular field, then you can disable it by invoking &lt;code&gt;AccessLevel.NONE&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.imti.lombok;
+@Getter
+@Setter
+public class GetterSetterLombok {
+    @Setter(AccessLevel.NONE)
+    private Long id;
+    private String name;
+    private String message;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;@ToString&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;By default, all non-static field will be included. If you want to exclude any, define them in &lt;code&gt;exclude&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.imti.lombok;
+//This will print value of
+all fields except id (excluded) and STATIC_VAR(static field).
+/* created by imteyaza on 6/8/2016 */
+@ToString(exclude=&#34;id&#34;)
+public class HelloLombok {
+	private static final int STATIC_VAR=10;
+	private String id;
+	private String name;
+	private String message;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Here is test class for the same.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;public class HelloLombokTest {
+    @Test
+    public void testToString(){
+        HelloLombok helloLombok = new HelloLombok();
+        helloLombok.setId(&#34;imti&#34;);
+        helloLombok.setMessage(&#34;Hello Lombok!&#34;);
+        helloLombok.setName(&#34;Imteyaz&#34;);
+        System.out.println(helloLombok.toString());
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Output of this test is:&lt;br&gt;
+&lt;code&gt;HelloLombok(name=Imteyaz, message=Hello Lombok!)&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Note: If you, by mistake, typed name of non-existing field, it will generate a warning!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.imti.lombok;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+//Created by imteyaza on 3/8/16.
+@Getter
+@Setter
+@ToString(exclude = {&#34;id&#34;, &#34;name&#34;,&#34;hell&#34;})
+public class HelloLombok {
+    private static final int VALUE = 10;
+    private String id;
+    private String name;
+    private String message;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;This will generate a warning &lt;code&gt;The field &#39;hell&#39; does not exist&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;@Log&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;For using any logging library, configure it as per the instructions by provider,then use it&amp;#8217;s annotation. for example for Log4j2, we will use &lt;code&gt;@Log4j2&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;@Log4j2
+public class HelloWorld {
+	private String name;
+	public static void main(String args []){
+		log.info(&#34;Inside the main method&#34;);
+	}
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;It creates following line for you&lt;br&gt;
+&lt;code&gt;private static final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(HelloWorld.class);&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;For other supported logging library, please refer to &lt;a href=&#34;https://projectlombok.org/features/Log.html&#34; class=&#34;bare&#34;&gt;https://projectlombok.org/features/Log.html&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;@Cleanup (My favourite)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.imti.lombok;
+import lombok.Cleanup;
+import java.io.*;
+//Created by imteyaza on 3/8/16.
+public class ResourceCleanupLombok {
+    public void readFile(String inputFileName, String outputFileName)
+        throws IOException {
+        @Cleanup InputStream inputStream = new FileInputStream(inputFileName);
+        @Cleanup OutputStream outputStream = new FileOutputStream(outputFileName);
+        byte[] buffer = new byte[1024];
+        while (true) {
+            int line = inputStream.read(buffer);
+            if (line == -1) {
+                break;
+            }
+            outputStream.write(buffer, 0, line);
+        }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;By default it looks for a method called &lt;code&gt;close()&lt;/code&gt; in the type of Object you are cleaning up.If you have a custom method name, it can called as &lt;code&gt;@Cleanup(&#34;destroy&#34;)&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;admonitionblock note&#34;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td class=&#34;icon&#34;&gt;
+&lt;div class=&#34;title&#34;&gt;Note&lt;/div&gt;
+&lt;/td&gt;
+&lt;td class=&#34;content&#34;&gt;
+&lt;code&gt;The destroy() method must be a non-argument method.&lt;/code&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;@EqualsAndHashCode&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;If a class is annotated with @EqualsAndHashCode,it will use all non-static fields, by default.&lt;br&gt;
+If you want to exclude some parameter, it can be done by defining &lt;code&gt;exclude={&#34;&amp;lt;field name&amp;gt;&#34;}&lt;/code&gt;. If the &lt;code&gt;&amp;lt;field name&amp;gt;&lt;/code&gt; does not exist, it will generate a warning.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.imti.lombok;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+//Created by imteyaza on 5/8/16.
+@EqualsAndHashCode(exclude = {&#34;id&#34;,&#34;name&#34;,&#34;hell&#34;})
+@Getter
+@Setter
+@ToString
+public class EqualAndHashcodeExample {
+    private static int COUNTER = 10;
+    private String id;
+    private String name;
+    private String message;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;This will generate a warning &lt;code&gt;The field &#39;hell&#39; does not exist&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;@NoArgsConstructor, @RequiredArgsConstructor, @AllArgsConstructor&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;em&gt;@NoArgsConstructor:&lt;/em&gt; generates default or no-arguments constructor for the class.
+&lt;em&gt;@RequiredArgsConstructor:&lt;/em&gt; creates a constructor with 1 parameter for each non-initialized final field.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.imti.lombok;
+import lombok.*;
+//Created by imteyaza on 6/8/16.
+@Getter
+@Setter
+@ToString(exclude = {&#34;id&#34;, &#34;name&#34;})
+@RequiredArgsConstructor
+public class HelloLombok {
+    private static final int VALUE = 10;
+    private String id;
+    private String name;
+    private final String message;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;will generate a class like below:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;package com.imti.lombok;
+import lombok.*;
+// Created by imteyaza on 6/8/16.
+public class HelloLombok {
+    private static final int VALUE = 10;
+    private String id;
+    private String name;
+    private final String message;
+    //Other codes omitted for brevity
+    public HelloLombok(final String message) {
+        this.message = message;
+    }
+    //Other codes omitted for brevity
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;em&gt;@AllArgsConstructor:&lt;/em&gt; will create a constructor with all fields.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;@Data&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;It bundles @Getter/@Setter, @ToString, @EqualsAndHashCode and @RequiredArgsConstructor.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Conclusion&lt;/em&gt;&lt;/strong&gt;
+These were some of the features provided by Lombok. Here is a link to list of all features-
+&lt;code&gt;&lt;a href=&#34;https://projectlombok.org/features/index.html&#34; class=&#34;bare&#34;&gt;https://projectlombok.org/features/index.html&lt;/a&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;em&gt;Lombok Project Page:&lt;/em&gt;  &lt;a href=&#34;https://projectlombok.org/index.html&#34; class=&#34;bare&#34;&gt;https://projectlombok.org/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;em&gt;Download and installation instructions:&lt;/em&gt; &lt;a href=&#34;https://projectlombok.org/download.html&#34; class=&#34;bare&#34;&gt;https://projectlombok.org/download.html&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;em&gt;IntelliJ plugin and installation instructions:&lt;/em&gt; &lt;a href=&#34;https://github.com/mplushnikov/lombok-intellij-plugin&#34; class=&#34;bare&#34;&gt;https://github.com/mplushnikov/lombok-intellij-plugin&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;em&gt;Sample application:&lt;/em&gt;
+&lt;a href=&#34;https://github.com/ahmadimt/JavaWithLombok&#34; class=&#34;bare&#34;&gt;https://github.com/ahmadimt/JavaWithLombok&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
